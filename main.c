@@ -1,17 +1,39 @@
 #include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 
-long pass_check() {
+int pass_check(char *correct_enc_pass) {
 
-    long sum = 0;
+    char password[20];
+    scanf("%s", password);
+    // printf("%s\n", password);
 
-    return sum;
+    if (strcmp(correct_enc_pass, password) == 0)
+        return 1;
+
+    return 0;
 }
 
 int main() {
 
-    printf("Input pass..\n");
-    long j = pass_check();
-    printf("j = %ld\n", j);
+    int correct = 0;
+    char correct_enc_pass[] = "qwerty"; // encrypted key to unlock program
+
+    printf("Input password:");
+    correct = pass_check(correct_enc_pass);
+
+    if (correct) {
+        printf("Password is correct!\n");
+
+        while (1) {
+            printf("Program running..\n");
+            sleep(1);
+        }
+
+    } else {
+        printf("Incorrect password. Try again.\n");
+    }
+
 
     return 0;
 }
