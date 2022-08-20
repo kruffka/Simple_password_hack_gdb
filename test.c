@@ -22,7 +22,7 @@ int main() {
     long i = 9;
     long j;
 
-    printf("Input pass..\n");
+    printf("Input pass.. %p %p\n", main, sum_func);
     j = sum_func(a, b, c, d, e, f, g, h, i);
     printf("j = %ld\n", j);
 
