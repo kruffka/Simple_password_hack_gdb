@@ -1,0 +1,404 @@
+GNU gdb (Ubuntu 9.2-0ubuntu1~20.04.1) 9.2
+Copyright (C) 2020 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from main...
+(gdb) br main
+Breakpoint 1 at 0x11d7: file main.c, line 12.
+(gdb) r
+Starting program: /mnt/c/Users/admin/Desktop/gdb_simple_pass_hack/main 
+
+Breakpoint 1, main () at main.c:12
+12	int main() {
+(gdb) diss[Kassemble 
+Dump of assembler code for function main:
+=> 0x00000000080011d7 <+0>:	endbr64 
+   0x00000000080011db <+4>:	push   %rbp
+   0x00000000080011dc <+5>:	mov    %rsp,%rbp
+   0x00000000080011df <+8>:	sub    $0x50,%rsp
+   0x00000000080011e3 <+12>:	movq   $0x1,-0x8(%rbp)
+   0x00000000080011eb <+20>:	movq   $0x2,-0x10(%rbp)
+   0x00000000080011f3 <+28>:	movq   $0x3,-0x18(%rbp)
+   0x00000000080011fb <+36>:	movq   $0x4,-0x20(%rbp)
+   0x0000000008001203 <+44>:	movq   $0x5,-0x28(%rbp)
+   0x000000000800120b <+52>:	movq   $0x6,-0x30(%rbp)
+   0x0000000008001213 <+60>:	movq   $0x7,-0x38(%rbp)
+   0x000000000800121b <+68>:	movq   $0x8,-0x40(%rbp)
+   0x0000000008001223 <+76>:	movq   $0x9,-0x48(%rbp)
+   0x000000000800122b <+84>:	lea    0xdd2(%rip),%rdi        # 0x8002004
+   0x0000000008001232 <+91>:	callq  0x8001060 <puts@plt>
+   0x0000000008001237 <+96>:	mov    -0x30(%rbp),%r8
+   0x000000000800123b <+100>:	mov    -0x28(%rbp),%rdi
+   0x000000000800123f <+104>:	mov    -0x20(%rbp),%rcx
+   0x0000000008001243 <+108>:	mov    -0x18(%rbp),%rdx
+   0x0000000008001247 <+112>:	mov    -0x10(%rbp),%rsi
+   0x000000000800124b <+116>:	mov    -0x8(%rbp),%rax
+   0x000000000800124f <+120>:	sub    $0x8,%rsp
+   0x0000000008001253 <+124>:	pushq  -0x48(%rbp)
+   0x0000000008001256 <+127>:	pushq  -0x40(%rbp)
+   0x0000000008001259 <+130>:	pushq  -0x38(%rbp)
+   0x000000000800125c <+133>:	mov    %r8,%r9
+   0x000000000800125f <+136>:	mov    %rdi,%r8
+   0x0000000008001262 <+139>:	mov    %rax,%rdi
+   0x0000000008001265 <+142>:	callq  0x8001169 <pass_check>
+   0x000000000800126a <+147>:	add    $0x20,%rsp
+   0x000000000800126e <+151>:	mov    %rax,-0x50(%rbp)
+   0x0000000008001272 <+155>:	mov    -0x50(%rbp),%rax
+   0x0000000008001276 <+159>:	mov    %rax,%rsi
+   0x0000000008001279 <+162>:	lea    0xd91(%rip),%rdi        # 0x8002011
+   0x0000000008001280 <+169>:	mov    $0x0,%eax
+   0x0000000008001285 <+174>:	callq  0x8001070 <printf@plt>
+   0x000000000800128a <+179>:	mov    $0x0,%eax
+   0x000000000800128f <+184>:	leaveq 
+   0x0000000008001290 <+185>:	retq   
+End of assembler dump.
+(gdb) n
+14	    long a = 1;
+(gdb) info frame
+Stack level 0, frame at 0x7ffffffee100:
+ rip = 0x80011e3 in main (main.c:14); saved rip = 0x7fffff5d40b3
+ source language c.
+ Arglist at 0x7ffffffee098, args: 
+ Locals at 0x7ffffffee098, Previous frame's sp is 0x7ffffffee100
+ Saved registers:
+  rbp at 0x7ffffffee0f0, rip at 0x7ffffffee0f8
+(gdb) p &[K$rip
+$1 = (void (*)()) 0x80011e3 <main+12>
+(gdb) p %[K$rsp
+$2 = (void *) 0x7ffffffee0a0
+(gdb) p $rsp[K[K[K[K[K[Kp $rbp
+$3 = (void *) 0x7ffffffee0f0
+(gdb) x 8[K[K/8b 0x7ffffffee100
+0x7ffffffee100:	32	-42	125	-1	-1	127	0	0
+(gdb) x/8b 0x7ffffffee100x 0x7ffffffee100
+[C[C[C[C[C[C[C[C[C[C[C
+0x7ffffffee100:	0x20	0xd6	0x7d	0xff	0xff	0x7f	0x00	0x00
+(gdb) x/104b 0x7ffffffee98
+0x7ffffffee98:	Cannot access memory at address 0x7ffffffee98
+(gdb) x/104b 0x7ffffffee98[C098
+0x7ffffffee098:	0xf0	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee0a0:	0xc2	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee0a8:	0xd7	0xe0	0xfe	0xff	0xff	0x7f	0x00	0x00
+0x7ffffffee0b0:	0xd6	0xe0	0xfe	0xff	0xff	0x7f	0x00	0x00
+0x7ffffffee0b8:	0xed	0x12	0x00	0x08	0x00	0x00	0x00	0x00
+0x7ffffffee0c0:	0xe8	0x12	0x7a	0xff	0xff	0x7f	0x00	0x00
+0x7ffffffee0c8:	0xa0	0x12	0x00	0x08	0x00	0x00	0x00	0x00
+0x7ffffffee0d0:	0x00	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee0d8:	0x80	0x10	0x00	0x08	0x00	0x00	0x00	0x00
+0x7ffffffee0e0:	0xe0	0xe1	0xfe	0xff	0xff	0x7f	0x00	0x00
+0x7ffffffee0e8:	0x00	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee0f0:	0x00	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee0f8:	0xb3	0x40	0x5d	0xff	0xff	0x7f	0x00	0x00
+(gdb) p j
+$4 = 194
+(gdb) p/x j
+$5 = 0xc2
+(gdb) p/x j[2P jx/104b 0x7ffffffee098[1P[1P[1P[1P[1P[1P 0x7ffffffee098
+[C[C[C[C[C[C[1P0x7ffffffee098
+[C[C[C[C[C[C[1Px7ffffffee098
+[C[C[C[C[C[C[1P7ffffffee098
+[C[C[C[C[C[C[1Pffffffee098
+[C[C[C[C[C[C[C[C[C[C[C[1Pee098
+[C[C[C[C[C[C[C[C[C[C[1Pee098
+[C[C[C[C[C[C[C[C[C[1Pee098
+[C[C[C[C[C[C[C[C[1Pee098[C[1Pee098[1Pee098[C[1P098[1P098[1P98[1P8[Kq
+A debugging session is active.
+
+	Inferior 1 [process 255] will be killed.
+
+Quit anyway? (y or n) y
+
+
+GNU gdb (Ubuntu 9.2-0ubuntu1~20.04.1) 9.2
+Copyright (C) 2020 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from main...
+(gdb) br main
+Breakpoint 1 at 0x11d7: file main.c, line 12.
+(gdb) br 26
+Breakpoint 2 at 0x1237: file main.c, line 26.
+(gdb) c
+The program is not being run.
+(gdb) r
+Starting program: /mnt/c/Users/admin/Desktop/gdb_simple_pass_hack/main 
+
+Breakpoint 1, main () at main.c:12
+12	int main() {
+(gdb) c
+Continuing.
+
+Breakpoint 2, main () at main.c:26
+26	    j = sum_func(a, b, c, d, e, f, g, h, i);
+(gdb) s[Kinfo frame
+Stack level 0, frame at 0x7ffffffee100:
+ rip = 0x8001237 in main (main.c:26); saved rip = 0x7fffff5d40b3
+ source language c.
+ Arglist at 0x7ffffffee098, args: 
+ Locals at 0x7ffffffee098, Previous frame's sp is 0x7ffffffee100
+ Saved registers:
+  rbp at 0x7ffffffee0f0, rip at 0x7ffffffee0f8
+(gdb) s
+sum_func (a=140737479546016, b=140737479563144, c=134225924, d=140737479562912, e=12, f=0, g=7, h=8, i=9)
+    at main.c:3
+3	long sum_func(long a, long b, long c, long d, long e, long f, long g, long h, long i) {
+(gdb) info frame
+Stack level 0, frame at 0x7ffffffee080:
+ rip = 0x8001169 in sum_func (main.c:3); saved rip = 0x800126a
+ called by frame at 0x7ffffffee100
+ source language c.
+ Arglist at 0x7ffffffee070, args: a=140737479546016, b=140737479563144, c=134225924, d=140737479562912, 
+    e=12, f=0, g=7, h=8, i=9
+ Locals at 0x7ffffffee070, Previous frame's sp is 0x7ffffffee080
+ Saved registers:
+  rip at 0x7ffffffee078
+(gdb) bt
+#0  sum_func (a=140737479546016, b=140737479563144, c=134225924, d=140737479562912, e=12, f=0, g=7, h=8, 
+    i=9) at main.c:3
+#1  0x000000000800126a in main () at main.c:26
+(gdb) disassemble 
+Dump of assembler code for function sum_func:
+=> 0x0000000008001169 <+0>:	endbr64 
+   0x000000000800116d <+4>:	push   %rbp
+   0x000000000800116e <+5>:	mov    %rsp,%rbp
+   0x0000000008001171 <+8>:	mov    %rdi,-0x18(%rbp)
+   0x0000000008001175 <+12>:	mov    %rsi,-0x20(%rbp)
+   0x0000000008001179 <+16>:	mov    %rdx,-0x28(%rbp)
+   0x000000000800117d <+20>:	mov    %rcx,-0x30(%rbp)
+   0x0000000008001181 <+24>:	mov    %r8,-0x38(%rbp)
+   0x0000000008001185 <+28>:	mov    %r9,-0x40(%rbp)
+   0x0000000008001189 <+32>:	movq   $0x0,-0x8(%rbp)
+   0x0000000008001191 <+40>:	mov    -0x18(%rbp),%rdx
+   0x0000000008001195 <+44>:	mov    -0x20(%rbp),%rax
+   0x0000000008001199 <+48>:	add    %rax,%rdx
+   0x000000000800119c <+51>:	mov    -0x28(%rbp),%rax
+   0x00000000080011a0 <+55>:	add    %rax,%rdx
+   0x00000000080011a3 <+58>:	mov    -0x30(%rbp),%rax
+   0x00000000080011a7 <+62>:	add    %rax,%rdx
+   0x00000000080011aa <+65>:	mov    -0x38(%rbp),%rax
+   0x00000000080011ae <+69>:	add    %rax,%rdx
+   0x00000000080011b1 <+72>:	mov    -0x40(%rbp),%rax
+   0x00000000080011b5 <+76>:	add    %rax,%rdx
+   0x00000000080011b8 <+79>:	mov    0x10(%rbp),%rax
+   0x00000000080011bc <+83>:	add    %rax,%rdx
+   0x00000000080011bf <+86>:	mov    0x18(%rbp),%rax
+   0x00000000080011c3 <+90>:	add    %rax,%rdx
+   0x00000000080011c6 <+93>:	mov    0x20(%rbp),%rax
+   0x00000000080011ca <+97>:	add    %rdx,%rax
+   0x00000000080011cd <+100>:	mov    %rax,-0x8(%rbp)
+   0x00000000080011d1 <+104>:	mov    -0x8(%rbp),%rax
+   0x00000000080011d5 <+108>:	pop    %rbp
+   0x00000000080011d6 <+109>:	retq   
+End of assembler dump.
+(gdb) disassemble 
+[C[C[C[C[C[Cbt[Kinfo frame
+[C[C[C[C[C[Cbt[K
+#0  sum_func (a=140737479546016, b=140737479563144, c=134225924, d=140737479562912, e=12, f=0, g=7, h=8, 
+    i=9) at main.c:3
+#1  0x000000000800126a in main () at main.c:26
+(gdb) btdisassemble 
+[C[C[C[C[C[Cbt[Kinfo frame
+[C[C[C[C[C[Cs[Kinfo frame[K[K[K[K[K[K[K[K[K[Kn
+5	    long sum = 0;
+(gdb) nbtdisassemble 
+[C[C[C[C[C[Cbt[Kdisassemble 
+[C[C[C[C[C[Cbt[K[K[Kinfo frame
+[C[C[C[C[C[Cs[Kinfo frame
+[C[C[C[C[C[Cc[Krcbr 26main[K[K[K[K[K[K[Kp[Kx/102[K4bx 0x7ffffffee070
+0x7ffffffee070:	0xf0	0xe0	0xfe	0xff	0xff	0x7f	0x00	0x00
+0x7ffffffee078:	0x6a	0x12	0x00	0x08	0x00	0x00	0x00	0x00
+0x7ffffffee080:	0x07	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee088:	0x08	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee090:	0x09	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee098:	0x37	0x12	0x00	0x08	0x00	0x00	0x00	0x00
+0x7ffffffee0a0:	0xc2	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee0a8:	0x09	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee0b0:	0x08	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee0b8:	0x07	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee0c0:	0x06	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee0c8:	0x05	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee0d0:	0x04	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+(gdb) p a
+$1 = 1
+(gdb) p ax/104bx 0x7ffffffee070
+[C[C[C[C[C[Cp a[K[K&a[Kh
+$2 = (long *) 0x7ffffffee088
+(gdb) p &h[Kf
+$3 = (long *) 0x7ffffffee030
+(gdb) p &fhf[Ka
+$4 = (long *) 0x7ffffffee058
+(gdb) p &afh[1Pax/104bx 0x7ffffffee070[C[K[K58
+0x7ffffffee058:	0x01	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee060:	0x00	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee068:	0x28	0x45	0x63	0xff	0xff	0x7f	0x00	0x00
+0x7ffffffee070:	0xf0	0xe0	0xfe	0xff	0xff	0x7f	0x00	0x00
+0x7ffffffee078:	0x6a	0x12	0x00	0x08	0x00	0x00	0x00	0x00
+0x7ffffffee080:	0x07	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee088:	0x08	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee090:	0x09	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee098:	0x37	0x12	0x00	0x08	0x00	0x00	0x00	0x00
+0x7ffffffee0a0:	0xc2	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee0a8:	0x09	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee0b0:	0x08	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee0b8:	0x07	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+(gdb) x/104bx 0x7ffffffee058
+[C[C[C[C[C[Cp &a[K[Kb
+$5 = (long *) 0x7ffffffee050
+(gdb) p &b[Kc
+$6 = (long *) 0x7ffffffee048
+(gdb) p &c[Kh
+$7 = (long *) 0x7ffffffee088
+(gdb) p &h[Kf
+$8 = (long *) 0x7ffffffee030
+(gdb) p &fhcbx/104bx 0x7ffffffee058[K[K30
+0x7ffffffee030:	0x06	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee038:	0x05	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee040:	0x04	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee048:	0x03	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee050:	0x02	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee058:	0x01	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee060:	0x00	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee068:	0x28	0x45	0x63	0xff	0xff	0x7f	0x00	0x00
+0x7ffffffee070:	0xf0	0xe0	0xfe	0xff	0xff	0x7f	0x00	0x00
+0x7ffffffee078:	0x6a	0x12	0x00	0x08	0x00	0x00	0x00	0x00
+0x7ffffffee080:	0x07	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee088:	0x08	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+0x7ffffffee090:	0x09	0x00	0x00	0x00	0x00	0x00	0x00	0x00
+(gdb) p $rsp
+$9 = (void *) 0x7ffffffee070
+(gdb) p $rbp
+$10 = (void *) 0x7ffffffee070
+(gdb) info r[Kframe
+Stack level 0, frame at 0x7ffffffee080:
+ rip = 0x8001189 in sum_func (main.c:5); saved rip = 0x800126a
+ called by frame at 0x7ffffffee100
+ source language c.
+ Arglist at 0x7ffffffee068, args: a=1, b=2, c=3, d=4, e=5, f=6, g=7, h=8, i=9
+ Locals at 0x7ffffffee068, Previous frame's sp is 0x7ffffffee080
+ Saved registers:
+  rbp at 0x7ffffffee070, rip at 0x7ffffffee078
+(gdb) p &sum
+$11 = (long *) 0x7ffffffee068
+(gdb) p $rsp
+$12 = (void *) 0x7ffffffee070
+(gdb) p %rp[Kbp
+A syntax error in expression, near `%rbp'.
+(gdb) p %rbp[1Prbp$rbp
+$13 = (void *) 0x7ffffffee070
+(gdb) disassemble 
+Dump of assembler code for function sum_func:
+   0x0000000008001169 <+0>:	endbr64 
+   0x000000000800116d <+4>:	push   %rbp
+   0x000000000800116e <+5>:	mov    %rsp,%rbp
+   0x0000000008001171 <+8>:	mov    %rdi,-0x18(%rbp)
+   0x0000000008001175 <+12>:	mov    %rsi,-0x20(%rbp)
+   0x0000000008001179 <+16>:	mov    %rdx,-0x28(%rbp)
+   0x000000000800117d <+20>:	mov    %rcx,-0x30(%rbp)
+   0x0000000008001181 <+24>:	mov    %r8,-0x38(%rbp)
+   0x0000000008001185 <+28>:	mov    %r9,-0x40(%rbp)
+=> 0x0000000008001189 <+32>:	movq   $0x0,-0x8(%rbp)
+   0x0000000008001191 <+40>:	mov    -0x18(%rbp),%rdx
+   0x0000000008001195 <+44>:	mov    -0x20(%rbp),%rax
+   0x0000000008001199 <+48>:	add    %rax,%rdx
+   0x000000000800119c <+51>:	mov    -0x28(%rbp),%rax
+   0x00000000080011a0 <+55>:	add    %rax,%rdx
+   0x00000000080011a3 <+58>:	mov    -0x30(%rbp),%rax
+   0x00000000080011a7 <+62>:	add    %rax,%rdx
+   0x00000000080011aa <+65>:	mov    -0x38(%rbp),%rax
+   0x00000000080011ae <+69>:	add    %rax,%rdx
+   0x00000000080011b1 <+72>:	mov    -0x40(%rbp),%rax
+   0x00000000080011b5 <+76>:	add    %rax,%rdx
+   0x00000000080011b8 <+79>:	mov    0x10(%rbp),%rax
+   0x00000000080011bc <+83>:	add    %rax,%rdx
+   0x00000000080011bf <+86>:	mov    0x18(%rbp),%rax
+   0x00000000080011c3 <+90>:	add    %rax,%rdx
+   0x00000000080011c6 <+93>:	mov    0x20(%rbp),%rax
+   0x00000000080011ca <+97>:	add    %rdx,%rax
+   0x00000000080011cd <+100>:	mov    %rax,-0x8(%rbp)
+   0x00000000080011d1 <+104>:	mov    -0x8(%rbp),%rax
+   0x00000000080011d5 <+108>:	pop    %rbp
+   0x00000000080011d6 <+109>:	retq   
+End of assembler dump.
+(gdb) n[Kn[Kbr 27
+Breakpoint 3 at 0x8001272: file main.c, line 27.
+(gdb) c
+Continuing.
+
+Breakpoint 3, main () at main.c:27
+27	    printf("j = %ld\n", j);
+(gdb) cbr 27disassemble 
+[C[C[C[C[C[C[6Pp $rbp%rbp$rsp&suminfo frame
+[C[C[C[C[C[C[4Pp $rbpinfo frame
+[C[C[C[C[C[C[4Pp &suminfo frame
+Stack level 0, frame at 0x7ffffffee100:
+ rip = 0x8001272 in main (main.c:27); saved rip = 0x7fffff5d40b3
+ source language c.
+ Arglist at 0x7ffffffee098, args: 
+ Locals at 0x7ffffffee098, Previous frame's sp is 0x7ffffffee100
+ Saved registers:
+  rbp at 0x7ffffffee0f0, rip at 0x7ffffffee0f8
+(gdb) disassemble 
+Dump of assembler code for function main:
+   0x00000000080011d7 <+0>:	endbr64 
+   0x00000000080011db <+4>:	push   %rbp
+   0x00000000080011dc <+5>:	mov    %rsp,%rbp
+   0x00000000080011df <+8>:	sub    $0x50,%rsp
+   0x00000000080011e3 <+12>:	movq   $0x1,-0x8(%rbp)
+   0x00000000080011eb <+20>:	movq   $0x2,-0x10(%rbp)
+   0x00000000080011f3 <+28>:	movq   $0x3,-0x18(%rbp)
+   0x00000000080011fb <+36>:	movq   $0x4,-0x20(%rbp)
+   0x0000000008001203 <+44>:	movq   $0x5,-0x28(%rbp)
+   0x000000000800120b <+52>:	movq   $0x6,-0x30(%rbp)
+   0x0000000008001213 <+60>:	movq   $0x7,-0x38(%rbp)
+   0x000000000800121b <+68>:	movq   $0x8,-0x40(%rbp)
+   0x0000000008001223 <+76>:	movq   $0x9,-0x48(%rbp)
+   0x000000000800122b <+84>:	lea    0xdd2(%rip),%rdi        # 0x8002004
+   0x0000000008001232 <+91>:	callq  0x8001060 <puts@plt>
+   0x0000000008001237 <+96>:	mov    -0x30(%rbp),%r8
+   0x000000000800123b <+100>:	mov    -0x28(%rbp),%rdi
+   0x000000000800123f <+104>:	mov    -0x20(%rbp),%rcx
+   0x0000000008001243 <+108>:	mov    -0x18(%rbp),%rdx
+   0x0000000008001247 <+112>:	mov    -0x10(%rbp),%rsi
+   0x000000000800124b <+116>:	mov    -0x8(%rbp),%rax
+   0x000000000800124f <+120>:	sub    $0x8,%rsp
+   0x0000000008001253 <+124>:	pushq  -0x48(%rbp)
+   0x0000000008001256 <+127>:	pushq  -0x40(%rbp)
+   0x0000000008001259 <+130>:	pushq  -0x38(%rbp)
+   0x000000000800125c <+133>:	mov    %r8,%r9
+   0x000000000800125f <+136>:	mov    %rdi,%r8
+   0x0000000008001262 <+139>:	mov    %rax,%rdi
+   0x0000000008001265 <+142>:	callq  0x8001169 <sum_func>
+   0x000000000800126a <+147>:	add    $0x20,%rsp
+   0x000000000800126e <+151>:	mov    %rax,-0x50(%rbp)
+=> 0x0000000008001272 <+155>:	mov    -0x50(%rbp),%rax
+   0x0000000008001276 <+159>:	mov    %rax,%rsi
+   0x0000000008001279 <+162>:	lea    0xd91(%rip),%rdi        # 0x8002011
+   0x0000000008001280 <+169>:	mov    $0x0,%eax
+   0x0000000008001285 <+174>:	callq  0x8001070 <printf@plt>
+   0x000000000800128a <+179>:	mov    $0x0,%eax
+   0x000000000800128f <+184>:	leaveq 
+   0x0000000008001290 <+185>:	retq   
+End of assembler dump.
+(gdb) 
