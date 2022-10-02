@@ -13,103 +13,23 @@ Find the GDB manual and other documentation resources online at:
 
 For help, type "help".
 Type "apropos word" to search for commands related to "word"...
-Reading symbols from main...
-(gdb) br main
-Breakpoint 1 at 0x1216: file main.c, line 17.
-(gdb) br [K[K[Kr < file
-Starting program: /mnt/c/Users/admin/Desktop/gdb_simple_pass_hack/main < file
+Reading symbols from ./main...
+(gdb) r < crack
+Starting program: /mnt/c/Users/admin/Desktop/gdb_simple_pass_hack/main < crack
+Input password:Password is correct!
+Program running..
+Program running..
+Program running..
+Program running..
+Program running..
+^C
+Program received signal SIGINT, Interrupt.
+0x00007fffff68d1e4 in __GI___clock_nanosleep (clock_id=<optimized out>, clock_id@entry=0, flags=flags@entry=0, req=req@entry=0x7ffffffedbd0,
+    rem=rem@entry=0x7ffffffedbd0) at ../sysdeps/unix/sysv/linux/clock_nanosleep.c:78
+78      ../sysdeps/unix/sysv/linux/clock_nanosleep.c: No such file or directory.
+(gdb) quit
+A debugging session is active.
 
-Breakpoint 1, main () at main.c:17
-17	int main() {
-(gdb) n
-19	    int correct = 0;
-(gdb) n
-20	    char correct_enc_pass[] = "qwerty"; // encrypted key to unlock program
-(gdb) n
-22	    printf("Input password:");
-(gdb) n
-23	    correct = pass_check(correct_enc_pass);
-(gdb) s
-pass_check (correct_enc_pass=0x7ffffffee0d7 "") at main.c:5
-5	int pass_check(char *correct_enc_pass) {
-(gdb) n
-8	    scanf("%s", password);
-(gdb) info frame
-Stack level 0, frame at 0x7ffffffee0e0:
- rip = 0x80011d9 in pass_check (main.c:8); saved rip = 0x8001257
- called by frame at 0x7ffffffee100
- source language c.
- Arglist at 0x7ffffffee098, args: correct_enc_pass=0x7ffffffee0e5 "qwerty"
- Locals at 0x7ffffffee098, Previous frame's sp is 0x7ffffffee0e0
- Saved registers:
-  rbp at 0x7ffffffee0d0, rip at 0x7ffffffee0d8
-(gdb) disase[Ksemble 
-Dump of assembler code for function pass_check:
-   0x00000000080011c9 <+0>:	endbr64 
-   0x00000000080011cd <+4>:	push   %rbp
-   0x00000000080011ce <+5>:	mov    %rsp,%rbp
-   0x00000000080011d1 <+8>:	sub    $0x30,%rsp
-   0x00000000080011d5 <+12>:	mov    %rdi,-0x28(%rbp)
-=> 0x00000000080011d9 <+16>:	lea    -0x20(%rbp),%rax
-   0x00000000080011dd <+20>:	mov    %rax,%rsi
-   0x00000000080011e0 <+23>:	lea    0xe21(%rip),%rdi        # 0x8002008
-   0x00000000080011e7 <+30>:	mov    $0x0,%eax
-   0x00000000080011ec <+35>:	callq  0x80010c0 <__isoc99_scanf@plt>
-   0x00000000080011f1 <+40>:	lea    -0x20(%rbp),%rdx
-   0x00000000080011f5 <+44>:	mov    -0x28(%rbp),%rax
-   0x00000000080011f9 <+48>:	mov    %rdx,%rsi
-   0x00000000080011fc <+51>:	mov    %rax,%rdi
-   0x00000000080011ff <+54>:	callq  0x80010b0 <strcmp@plt>
-   0x0000000008001204 <+59>:	test   %eax,%eax
-   0x0000000008001206 <+61>:	jne    0x800120f <pass_check+70>
-   0x0000000008001208 <+63>:	mov    $0x1,%eax
-   0x000000000800120d <+68>:	jmp    0x8001214 <pass_check+75>
-   0x000000000800120f <+70>:	mov    $0x0,%eax
-   0x0000000008001214 <+75>:	leaveq 
-   0x0000000008001215 <+76>:	retq   
-End of assembler dump.
-(gdb) p $rbp-)($rbp-)[C[C[C[C[C[C0)x)2)0)
-$1 = (void *) 0x7ffffffee0b0
-(gdb) x/32bx 0x7ffffffee0b0
-0x7ffffffee0b0:	0xd6	0xe0	0xfe	0xff	0xff	0x7f	0x00	0x00
-0x7ffffffee0b8:	0xed	0x12	0x00	0x08	0x00	0x00	0x00	0x00
-0x7ffffffee0c0:	0xe8	0x12	0x7a	0xff	0xff	0x7f	0x00	0x00
-0x7ffffffee0c8:	0xa0	0x12	0x00	0x08	0x00	0x00	0x00	0x00
-(gdb) 
-[K(gdb) x/32bx 0x7ffffffee0b0[1P[1P[1@4[1@0[C[1P 0x7ffffffee0b0
-[C[C[C[C[C[C[C[C[C[C[C[1P[1@8
-0x7ffffffee0b0:	0xd6	0xe0	0xfe	0xff	0xff	0x7f	0x00	0x00
-0x7ffffffee0b8:	0xed	0x12	0x00	0x08	0x00	0x00	0x00	0x00
-0x7ffffffee0c0:	0xe8	0x12	0x7a	0xff	0xff	0x7f	0x00	0x00
-0x7ffffffee0c8:	0xa0	0x12	0x00	0x08	0x00	0x00	0x00	0x00
-0x7ffffffee0d0:	0xf0	0xe0	0xfe	0xff	0xff	0x7f	0x00	0x00
-0x7ffffffee0d8:	0x57	0x12	0x00	0x08	0x00	0x00	0x00	0x00
-(gdb) n
-11	    if (strcmp(correct_enc_pass, password) == 0)
-(gdb) nx/48b 0x7ffffffee0b0
-0x7ffffffee0b0:	0x31	0x31	0x31	0x31	0x31	0x31	0x00	0x00
-0x7ffffffee0b8:	0xed	0x12	0x00	0x08	0x00	0x00	0x00	0x00
-0x7ffffffee0c0:	0xe8	0x12	0x7a	0xff	0xff	0x7f	0x00	0x00
-0x7ffffffee0c8:	0xa0	0x12	0x00	0x08	0x00	0x00	0x00	0x00
-0x7ffffffee0d0:	0xf0	0xe0	0xfe	0xff	0xff	0x7f	0x00	0x00
-0x7ffffffee0d8:	0x57	0x12	0x00	0x08	0x00	0x00	0x00	0x00
-(gdb) n
-14	    return 0;
-(gdb) n
-15	}
-(gdb) n
-main () at main.c:25
-25	    if (correct) {
-(gdb) n
-34	        printf("Incorrect password. Try again.\n");
-(gdb) n
-38	    return 0;
-(gdb) n
-39	}
-(gdb) n
-__libc_start_main (main=0x8001216 <main>, argc=1, argv=0x7ffffffee1e8, init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, stack_end=0x7ffffffee1d8) at ../csu/libc-start.c:342
-342	../csu/libc-start.c: No such file or directory.
-(gdb) n
-Input password:Incorrect password. Try again.
-[Inferior 1 (process 791) exited normally]
-(gdb) q
+        Inferior 1 [process 593] will be killed.
+
+Quit anyway? (y or n) y

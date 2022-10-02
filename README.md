@@ -1,15 +1,11 @@
 # gdb_simple_pass_hack  
 
-To Compile main and crack_gen:  
-    make main
-
-Compile test:  
-    make test
+To compile everything just run make
 
 Compiling with -fno-stack-protector option to be able modify return addr of function frame
 
 main.c is actual program with simple password check that I'm "hacking" with gdb
-Crack_gen.c can write in file 'crack' ascii symbols from given rip addr (addr probably will be different)
+Crack_gen.c can write in file 'crack' ascii symbols from given rip addr (addr may be different)
 and then we can launch program in gdb like "r < crack"
 
 file content: 111111 (1 char ascii = 0x31 hex)  

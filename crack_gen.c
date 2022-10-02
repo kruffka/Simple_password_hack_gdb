@@ -3,7 +3,7 @@
 int main() {
 
     // x86_64, 8 byte pointers
-    unsigned long rbp_addr = 0x00007ffffffe00f0;
+    // unsigned long rbp_addr = 0x00007ffffffe00f0;
     unsigned long rip_addr = 0x0000000008001260;
     FILE *file = fopen("crack", "w");
 
@@ -18,7 +18,7 @@ int main() {
 
     // rbp addr
     // for (int i = 0; i < 8; i++) {
-    //     fprintf(file, "%c", (char)(rip_addr >> (i*8)));
+    //     fprintf(file, "%c", (char)(rbp_addr >> (i*8)));
     // }
 
     for (int i = 0; i < 8; i++) {
